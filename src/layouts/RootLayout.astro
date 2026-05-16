@@ -1,0 +1,195 @@
+---
+import "../styles/index.css";
+import Header from "../components/blocks/header.astro";
+import Footer from "../components/blocks/footer.astro";
+import { Font } from "astro:assets";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+}
+
+const {
+  title = "BitOverlay",
+  description = "Modern web development studio building fast, scalable, and beautiful websites and applications.",
+  image = "/og-image.jpg",
+  canonicalURL,
+  noindex = false,
+  type = "website",
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://example.com");
+
+const currentURL = new URL(Astro.url.pathname, site);
+
+const canonical = canonicalURL
+  ? new URL(canonicalURL, site).toString()
+  : currentURL.toString();
+
+const pageTitle =
+  title === "BitOverlay"
+    ? title
+    : `${title} | BitOverlay`;
+
+const ogImage = new URL(image, site).toString();
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Basic -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <title>{pageTitle}</title>
+
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+
+    <link
+      rel="canonical"
+      href={canonical}
+    />
+
+    <!-- Theme -->
+    <meta
+      name="theme-color"
+      content="#0B0F19"
+    />
+
+    <!-- Robots -->
+    <meta
+      name="robots"
+      content={noindex ? "noindex, nofollow" : "index, follow"}
+    />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      href="/apple-touch-icon.png"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:type"
+      content={type}
+    />
+
+    <meta
+      property="og:title"
+      content={pageTitle}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
+
+    <meta
+      property="og:url"
+      content={canonical}
+    />
+
+    <meta
+      property="og:site_name"
+      content="BitOverlay"
+    />
+
+    <meta
+      property="og:image"
+      content={ogImage}
+    />
+
+    <meta
+      property="og:image:alt"
+      content={pageTitle}
+    />
+
+    <!-- Twitter -->
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content={pageTitle}
+    />
+
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+
+    <meta
+      name="twitter:image"
+      content={ogImage}
+    />
+
+    <!-- RSS -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed"
+      href="/rss.xml"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "BitOverlay",
+        url: site.toString(),
+        logo: `${site}logo.png`,
+      })}
+    </script>
+
+    <!-- Prevent flash -->
+    <script is:inline>
+      (() => {
+        const theme = localStorage.getItem("theme");
+
+        if (
+          theme === "dark" ||
+          (!theme &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <slot name="head" />
+  </head>
+
+  <body class="min-h-screen bg-background text-foreground antialiased flex flex-col font-sans">
+    <Header />
+    <main class="grow">
+    <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

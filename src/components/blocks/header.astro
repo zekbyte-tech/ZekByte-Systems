@@ -1,0 +1,84 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header class="border-border bg-background border-b">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <a href="/" class="transition-opacity hover:opacity-70">
+            <h1 class="m-0 tracking-tight">TechBlog</h1>
+        </a>
+
+        <nav class="flex items-center gap-8">
+            <a
+                href="/"
+                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
+            >
+                Home
+            </a>
+
+            <a
+                href="/blog"
+                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
+            >
+                Articles
+            </a>
+
+            <a
+                href="/about"
+                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
+            >
+                About
+            </a>
+
+            <button
+                id="theme-toggler"
+                class="hover:bg-muted cursor-pointer rounded-md p-2 transition-colors"
+                aria-label="Toggle Theme"
+            >
+                <Icon id="theme-icon" name="lucide:sun" class="h-5 w-5" />
+            </button>
+        </nav>
+    </div>
+</header>
+
+<script is:inline>
+    const root = document.documentElement;
+    const button = document.getElementById("theme-toggler");
+    const icon = document.getElementById("theme-icon");
+
+    function getTheme() {
+        const storedTheme = localStorage.getItem("theme");
+
+        if (storedTheme === "light" || storedTheme === "dark") {
+            return storedTheme;
+        }
+
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    }
+
+    function applyTheme(theme) {
+        root.classList.remove("light", "dark");
+        root.classList.add(theme);
+
+        localStorage.setItem("theme", theme);
+
+        if (icon) {
+            icon.setAttribute(
+                "data-icon",
+                theme === "dark" ? "lucide:moon" : "lucide:sun",
+            );
+        }
+    }
+
+    let currentTheme = getTheme();
+
+    applyTheme(currentTheme);
+
+    button?.addEventListener("click", () => {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+
+        applyTheme(currentTheme);
+    });
+</script>

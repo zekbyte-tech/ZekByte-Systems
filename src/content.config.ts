@@ -1,20 +1,47 @@
-import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { z } from 'astro/zod';
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+import { defineCollection } from "astro:content";
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
+const home = defineCollection({
+    loader: glob({ base: "./src/content", pattern: "home.yaml" }),
+    schema: () =>
+        z.object({
+            banner,
+        }),
 });
 
-export const collections = { blog };
+const banner = z
+    .object({
+        title: z.string(),
+        description: z.string(),
+        buttons: z.object({
+            primary: z.object({
+                label: z.string(),
+                href: z.string(),
+                icon: z.string(),
+                target: z.string().optional(),
+            }),
+            secondary: z.object({
+                label: z.string(),
+                href: z.string(),
+                icon: z.string(),
+                target: z.string().optional(),
+            }),
+        }),
+    })
+    .optional();
+
+const blog = defineCollection({
+    loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
+    schema: () =>
+        z.object({
+            title: z.string(),
+            excerpt: z.string(),
+            youtubeId: z.string(),
+            publishedAt: z.coerce.date(),
+            tags: z.string().array(),
+            author: z.string(),
+        }),
+});
+
+export const collections = { home, blog };

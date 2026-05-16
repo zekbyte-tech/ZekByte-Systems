@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { posts } = Astro.props;
+---
+
+{
+    posts.length > 0 && (
+        <section class="border-border border-b">
+            <div class="mx-auto max-w-5xl px-6 py-16">
+                <div class="flex flex-col gap-16">
+                    {posts.map((post) => (
+                        <a
+                            href={`/blog/${post.id}`}
+                            class="group block no-underline"
+                        >
+                            <article class="overflow-hidden">
+                                <h3 class="group-hover:text-accent mb-2 text-2xl transition-colors group-hover:underline">
+                                    {post.data.title}
+                                </h3>
+                                <div class="text-muted-foreground mb-2 flex items-center gap-4 text-sm">
+                                    <time>
+                                        {new Date(
+                                            post.data.publishedAt,
+                                        ).toLocaleDateString("en-US", {
+                                            month: "short",
+                                            day: "numeric",
+                                            year: "numeric",
+                                        })}
+                                    </time>
+                                </div>
+                                <p class="text-muted-foreground m-0">
+                                    {post.data.excerpt}
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        {post.data.tags.map((tag) => (
+                                            <span class="bg-muted text-muted-foreground rounded px-2 py-1 text-sm">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div class="hover:text-accent flex items-center gap-1 text-sm transition-colors hover:underline">
+                                        Read More
+                                        <Icon
+                                            name="lucide:arrow-right"
+                                            class="size-3"
+                                        />
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}

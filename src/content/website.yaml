@@ -1,0 +1,32 @@
+title: "Website Title"
+description: "Website Description"
+
+menus:
+    main:
+        - name: "Home"
+          href: "/"
+
+        - name: "Blog"
+          href: "/blog"
+
+        - name: "About"
+          href: "/about"
+
+social:
+    main:
+        - name: "Mastodom"
+          href: "https://mastodon.com"
+          icon: "lucide:mastodon"
+
+        - name: "Twitter"
+          href: "https://twitter.com"
+          icon: "lucide:twitter"
+
+        - name: "GitHub"
+          href: "https://github.com"
+          icon: "lucide:github"
+
+footer:
+    title: ""
+    description: ""
+    copyright: ""
