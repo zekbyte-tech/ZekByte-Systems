@@ -1,34 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
+import { getEntry } from "astro:content";
+
+const site = await getEntry("site", "site");
 ---
 
 <header class="border-border bg-background border-b">
     <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a href="/" class="transition-opacity hover:opacity-70">
-            <h1 class="m-0 tracking-tight">TechBlog</h1>
+            <h1 class="m-0 tracking-tight">{site.data.title}</h1>
         </a>
 
         <nav class="flex items-center gap-8">
-            <a
-                href="/"
-                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
-            >
-                Home
-            </a>
-
-            <a
-                href="/blog"
-                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
-            >
-                Articles
-            </a>
-
-            <a
-                href="/about"
-                class="text-foreground/70 hover:text-foreground no-underline transition-colors"
-            >
-                About
-            </a>
+            {
+                site.data.menus.main.map((post) => (
+                    <a
+                        href={post.href}
+                        class="text-foreground/70 hover:text-foreground no-underline transition-colors"
+                    >
+                        {post.name}
+                    </a>
+                ))
+            }
 
             <button
                 id="theme-toggler"

@@ -3,8 +3,8 @@ banner:
     description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
     buttons:
         primary:
-            label: "Browse Categories"
-            href: "/tags"
+            label: "Browse Articles"
+            href: "/blog"
             icon: "lucide:arrow-right"
 
         secondary:

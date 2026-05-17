@@ -1,7 +1,8 @@
 ---
+import { Icon } from "astro-icon/components";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import RootLayout from "../../layouts/RootLayout.astro";
-import { Icon } from "astro-icon/components";
+import { getRelatedPosts } from "../../lib/get-related-posts";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -13,18 +14,30 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const relatedPosts = [];
+const posts = await getCollection("blog");
+
 const { Content } = await render(post);
+const relatedPosts = getRelatedPosts(post, posts);
+
+const site = Astro.site;
+const canonicalURL = `${site}blog/${post.id}`;
+const image = `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`;
 ---
 
-<RootLayout>
+<RootLayout
+    title={post.data.title}
+    description={post.data.excerpt}
+    image={image}
+    canonicalURL={canonicalURL}
+    type="article"
+>
     <div class="bg-background min-h-screen">
         <article class="mx-auto max-w-4xl px-6 py-12">
             <a
                 href="/blog"
                 class="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 no-underline"
             >
-                <Icon name="lucide:arrow-left" class="w-4 h-4" />
+                <Icon name="lucide:arrow-left" class="h-4 w-4" />
                 Back to Articles
             </a>
 
@@ -32,10 +45,13 @@ const { Content } = await render(post);
                 <div class="mb-4 flex flex-wrap gap-2">
                     {
                         post.data.tags.map((tag) => (
-                            <span class="bg-muted text-muted-foreground flex items-center gap-1 rounded-full px-3 py-1 text-sm">
-                                <!-- <Tag class="h-3 w-3" /> -->
+                            <a
+                                href={`/tags/${tag}`}
+                                class="bg-muted text-muted-foreground flex items-center gap-1 rounded-full px-3 py-1 text-sm"
+                            >
+                                <Icon name="lucide:tag" class="h-3 w-3" />
                                 {tag}
-                            </span>
+                            </a>
                         ))
                     }
                 </div>
@@ -58,7 +74,7 @@ const { Content } = await render(post);
                         </div>
                     </div>
                     <div class="flex items-center gap-1">
-                        <Icon name="lucide:calendar" class="w-4 h-4" />
+                        <Icon name="lucide:calendar" class="h-4 w-4" />
                         <time
                             >{
                                 new Date(
@@ -123,35 +139,35 @@ const { Content } = await render(post);
 
             <div class="mb-12">
                 <h4 class="mb-4">Share this article</h4>
-              <div class="flex gap-3">
-                <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent("url")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="p-3 border border-border rounded-md hover:bg-muted transition-colors text-foreground"
-                  aria-label="Share on Twitter"
-                >
-                  <Icon name="lucide:twitter" class="w-5 h-5" />
-                </a>
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("url")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="p-3 border border-border rounded-md hover:bg-muted transition-colors text-foreground"
-                  aria-label="Share on Facebook"
-                >
-                  <Icon name="lucide:facebook" class="w-5 h-5" />
-                </a>
-                <a
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("url")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="p-3 border border-border rounded-md hover:bg-muted transition-colors text-foreground"
-                  aria-label="Share on LinkedIn"
-                >
-                  <Icon name="lucide:linkedin" class="w-5 h-5" />
-                </a>
-              </div>
+                <div class="flex gap-3">
+                    <a
+                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent("url")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+                        aria-label="Share on Twitter"
+                    >
+                        <Icon name="lucide:twitter" class="h-5 w-5" />
+                    </a>
+                    <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("url")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+                        aria-label="Share on Facebook"
+                    >
+                        <Icon name="lucide:facebook" class="h-5 w-5" />
+                    </a>
+                    <a
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("url")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+                        aria-label="Share on LinkedIn"
+                    >
+                        <Icon name="lucide:linkedin" class="h-5 w-5" />
+                    </a>
+                </div>
             </div>
 
             {

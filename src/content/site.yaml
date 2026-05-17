@@ -1,0 +1,28 @@
+title: "TechBlog"
+description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+
+menus:
+    main:
+        - name: "Home"
+          href: "/"
+
+        - name: "Blog"
+          href: "/blog"
+
+        - name: "About"
+          href: "/about"
+
+social:
+    main:
+        - name: "Twitter"
+          href: "https://twitter.com"
+          icon: "lucide:twitter"
+
+        - name: "GitHub"
+          href: "https://github.com"
+          icon: "lucide:github"
+
+footer:
+    title: "TechBlog"
+    description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+    copyright: "© 2026 TechBlog. All rights reserved."

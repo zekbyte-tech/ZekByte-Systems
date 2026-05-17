@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Banner from "../components/blocks/banner.astro";
+import FeaturedPosts from "../components/blocks/featured-posts.astro";
 import RecentPosts from "../components/blocks/recent-posts.astro";
 import RootLayout from "../layouts/RootLayout.astro";
 
@@ -9,9 +10,16 @@ const home = await getEntry("home", "home");
 const posts = (await getCollection("blog")).sort(
     (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
 );
+
+const featuredPosts = posts.filter((post) => post.data.featured);
 ---
 
 <RootLayout>
     {home && home.data && home.data.banner && <Banner {...home.data.banner} />}
+    {
+        featuredPosts && featuredPosts.length > 0 && (
+            <FeaturedPosts title="Featured Posts" posts={featuredPosts} />
+        )
+    }
     {posts.length > 0 && <RecentPosts posts={posts} />}
 </RootLayout>
