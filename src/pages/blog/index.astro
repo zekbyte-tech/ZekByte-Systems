@@ -9,7 +9,7 @@ const posts = (await getCollection("blog")).sort(
 const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags)));
 ---
 
-<RootLayout>
+<RootLayout title="Blog">
     <div class="bg-background min-h-screen">
         <div class="mx-auto max-w-5xl px-6 py-12">
             <section class="mb-12">
