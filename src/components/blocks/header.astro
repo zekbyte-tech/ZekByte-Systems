@@ -1,8 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getEntry } from "astro:content";
-
-const site = await getEntry("site", "site");
+const { site } = Astro.props;
 ---
 
 <header class="border-border bg-background border-b">
