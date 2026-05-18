@@ -10,7 +10,7 @@ import { defineConfig, fontProviders } from "astro/config";
 const isDev = process.env.NODE_ENV === "development";
 
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://techlynqtechlyn-website.iago-084.workers.dev/",
   integrations: [mdx(), sitemap(), icon()],
 
   fonts: [

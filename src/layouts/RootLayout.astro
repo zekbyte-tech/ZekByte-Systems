@@ -28,9 +28,12 @@ const {
 const siteURL = Astro.site ?? new URL("https://example.com");
 const currentURL = new URL(Astro.url.pathname, siteURL);
 
-const canonical = canonicalURL ? new URL(canonicalURL, siteURL).toString() : currentURL.toString();
+const canonical = canonicalURL
+  ? new URL(canonicalURL, siteURL).toString()
+  : currentURL.toString();
 
-const pageTitle = title === site?.data.title ? title : `${title} | ${site?.data.title}`;
+const pageTitle =
+  title === site?.data.title ? title : `${title} | ${site?.data.title}`;
 const ogImage = new URL(image, siteURL).toString();
 ---
 
@@ -46,16 +49,19 @@ const ogImage = new URL(image, siteURL).toString();
     <link rel="canonical" href={canonical} />
 
     <!-- Theme -->
-    <meta name="theme-color" content="#0B0F19" />
+    <meta name="theme-color" content="#0f0f0f" />
 
     <!-- Robots -->
-    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta
+      name="robots"
+      content={noindex ? "noindex, nofollow" : "index, follow"}
+    />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
@@ -73,18 +79,25 @@ const ogImage = new URL(image, siteURL).toString();
     <meta name="twitter:image" content={ogImage} />
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed"
+      href="/rss.xml"
+    />
 
     <!-- Structured Data -->
-    <script type="application/ld+json">
-      {JSON.stringify({
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: site.data.title,
+        name: site?.data.title,
         url: siteURL.toString(),
         logo: `${siteURL}logo.png`,
       })}
-    </script>
+    />
 
     <!-- Prevent flash -->
     <script is:inline>
@@ -93,8 +106,7 @@ const ogImage = new URL(image, siteURL).toString();
 
         if (
           theme === "dark" ||
-          (!theme &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
         ) {
           document.documentElement.classList.add("dark");
         } else {
@@ -106,10 +118,12 @@ const ogImage = new URL(image, siteURL).toString();
     <slot name="head" />
   </head>
 
-  <body class="min-h-screen bg-background text-foreground antialiased flex flex-col font-sans">
+  <body
+    class="bg-background text-foreground flex min-h-screen flex-col font-sans antialiased"
+  >
     <Header />
     <main class="grow">
-    <slot />
+      <slot />
     </main>
     <Footer />
   </body>
