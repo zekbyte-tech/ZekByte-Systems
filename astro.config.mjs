@@ -1,13 +1,10 @@
 // @ts-check
 
-import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig, fontProviders } from "astro/config";
-
-const isDev = process.env.NODE_ENV === "development";
 
 export default defineConfig({
   site: "https://techlynqtechlyn-website.iago-084.workers.dev/",
@@ -29,6 +26,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
-  adapter: isDev ? undefined : cloudflare(),
 });

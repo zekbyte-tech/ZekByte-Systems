@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
 import RootLayout from "../../layouts/RootLayout.astro";
-import ArticleCardWide from "../../components/components/article-card-wide.astro";
+import ArticleCardWide from "../../components/ui/article-card-wide.astro";
 
 export async function getStaticPaths({ paginate }) {
   const posts = (await getCollection("blog")).sort(
