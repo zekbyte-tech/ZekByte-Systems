@@ -9,8 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "generate-types": "wrangler types"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.5",
@@ -30,11 +29,9 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "wrangler": "^4.92.0"
+    "prettier-plugin-tailwindcss": "^0.8.0"
   },
   "overrides": {
     "vite": "^7"
   }
 }
-
