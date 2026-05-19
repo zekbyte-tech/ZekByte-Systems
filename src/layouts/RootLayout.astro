@@ -1,17 +1,16 @@
 ---
 import "../styles/index.css";
-import Header from "../components/blocks/header.astro";
 import Footer from "../components/blocks/footer.astro";
-import SEO from "../components/seo.astro";
+import Header from "../components/blocks/header.astro";
 import JSONLD from "../components/jsonld.astro";
-
+import SEO from "../components/seo.astro";
 import { getSite } from "../lib/get-site";
 
 const site = await getSite();
 
 type Props = {
-  seo: any;
-  schema?: object;
+    seo: any;
+    schema?: object;
 };
 
 const { seo, schema } = Astro.props;
@@ -19,67 +18,83 @@ const { seo, schema } = Astro.props;
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <SEO {...seo} />
-    {schema && <JSONLD data={schema} />}
+    <head>
+        <SEO {...seo} />
+        {schema && <JSONLD data={schema} />}
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
 
-    <!-- Theme -->
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#0f0f0f"
-    />
+        <!-- Theme -->
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: light)"
+            content="#ffffff"
+        />
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: dark)"
+            content="#0f0f0f"
+        />
 
-    <!-- Sitemap -->
-    <link rel="sitemap" href="/sitemap-index.xml" />
+        <!-- Sitemap -->
+        <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+        <!-- Favicons -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- RSS -->
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href="/rss.xml"
-    />
+        <!-- RSS -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS Feed"
+            href="/rss.xml"
+        />
 
-    <!-- Prevent flash -->
-    <script is:inline>
-      (() => {
-        const theme = localStorage.getItem("theme");
+        <!-- Prevent flash -->
+        <script is:inline>
+            (() => {
+                const theme = localStorage.getItem("theme");
 
-        if (
-          theme === "dark" ||
-          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      })();
-    </script>
-  </head>
+                if (
+                    theme === "dark" ||
+                    (!theme &&
+                        window.matchMedia("(prefers-color-scheme: dark)")
+                            .matches)
+                ) {
+                    document.documentElement.classList.add("dark");
+                } else {
+                    document.documentElement.classList.remove("dark");
+                }
+            })();
+        </script>
+    </head>
 
-  <body
-    class="bg-background text-foreground flex min-h-screen flex-col font-sans antialiased"
-  >
-    <Header site={site} />
-    <main class="grow">
-      <slot />
-    </main>
-    <Footer />
-  </body>
+    <body
+        class="bg-background text-foreground flex min-h-screen flex-col font-sans antialiased"
+    >
+        <Header site={site} />
+        <main class="grow">
+            <slot />
+        </main>
+        <Footer site={site} />
+    </body>
 </html>

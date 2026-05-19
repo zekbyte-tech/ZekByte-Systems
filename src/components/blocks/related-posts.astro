@@ -1,31 +1,41 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    title: string;
+    posts: CollectionEntry<"blog">[];
+}
+
 const { title, posts } = Astro.props;
 ---
 
 {
-  posts.length > 0 && (
-    <div class="border-border border-t pt-12">
-      <h2 class="mb-8">{title}</h2>
-      <div class="grid gap-6 md:grid-cols-3">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="group block no-underline">
-            <article class="border-border hover:border-foreground/20 bg-card overflow-hidden rounded-lg border transition-colors">
-              <div class="bg-muted relative aspect-video">
-                <img
-                  src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
-                  alt={post.data.title}
-                  class="h-full w-full object-cover"
-                />
-              </div>
-              <div class="p-4">
-                <h3 class="group-hover:text-accent transition-colors">
-                  {post.data.title}
-                </h3>
-              </div>
-            </article>
-          </a>
-        ))}
-      </div>
-    </div>
-  )
+    posts.length > 0 && (
+        <div class="border-border border-t pt-12">
+            <h2 class="mb-8">{title}</h2>
+            <div class="grid gap-6 md:grid-cols-3">
+                {posts.map((post) => (
+                    <a
+                        href={`/blog/${post.id}`}
+                        class="group block no-underline"
+                    >
+                        <article class="border-border hover:border-foreground/20 bg-card overflow-hidden rounded-lg border transition-colors">
+                            <div class="bg-muted relative aspect-video">
+                                <img
+                                    src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
+                                    alt={post.data.title}
+                                    class="h-full w-full object-cover"
+                                />
+                            </div>
+                            <div class="p-4">
+                                <h3 class="group-hover:text-accent transition-colors">
+                                    {post.data.title}
+                                </h3>
+                            </div>
+                        </article>
+                    </a>
+                ))}
+            </div>
+        </div>
+    )
 }

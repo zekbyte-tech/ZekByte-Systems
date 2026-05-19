@@ -3,20 +3,20 @@ const { id, title } = Astro.props;
 ---
 
 <div class="mb-12">
-  <div
-    class="bg-muted border-border aspect-video overflow-hidden rounded-lg border"
-  >
-    <iframe
-      width="100%"
-      height="100%"
-      src={`https://www.youtube.com/embed/${id}`}
-      title={title}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      loading="lazy"
-      class="h-full w-full"></iframe>
-  </div>
-  <p class="text-muted-foreground mt-3 text-center text-sm">
-    Watch the full tutorial on YouTube
-  </p>
+    <div
+        class="bg-muted border-border aspect-video overflow-hidden rounded-lg border"
+    >
+        <iframe
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${id}`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            class="h-full w-full"></iframe>
+    </div>
+    <p class="text-muted-foreground mt-3 text-center text-sm">
+        Watch the full tutorial on YouTube
+    </p>
 </div>

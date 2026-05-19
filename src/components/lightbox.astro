@@ -1,40 +1,42 @@
 <script>
-  import PhotoSwipeLightbox from "photoswipe/lightbox";
-  import "photoswipe/style.css";
+    import PhotoSwipeLightbox from "photoswipe/lightbox";
+    import "photoswipe/style.css";
 
-  async function initLightbox() {
-    const images = document.querySelectorAll(".prose img");
+    async function initLightbox() {
+        const images =
+            document.querySelectorAll<HTMLImageElement>(".prose img");
 
-    await Promise.all(
-      [...images].map(async (img) => {
-        if (img.parentElement?.tagName === "A") return;
+        await Promise.all(
+            [...images].map(async (img) => {
+                if (img.parentElement?.tagName === "A") return;
 
-        const image = new Image();
-        image.src = img.src;
+                const image = new Image();
+                image.src = img.src;
 
-        await image.decode().catch(() => {});
+                await image.decode().catch(() => {});
 
-        const link = document.createElement("a");
+                const link = document.createElement("a");
 
-        link.href = img.src;
+                link.href = img.src;
 
-        link.dataset.pswpWidth = image.naturalWidth;
-        link.dataset.pswpHeight = image.naturalHeight;
-        link.dataset.pswpCaption = img.alt || "";
+                link.dataset.pswpWidth = image.naturalWidth.toString();
+                link.dataset.pswpHeight = image.naturalHeight.toString();
 
-        img.parentNode.insertBefore(link, img);
-        link.appendChild(img);
-      }),
-    );
+                link.dataset.pswpCaption = img.alt || "";
 
-    const lightbox = new PhotoSwipeLightbox({
-      gallery: ".prose",
-      children: "a[data-pswp-width]",
-      pswpModule: () => import("photoswipe"),
-    });
+                img.parentNode?.insertBefore(link, img);
+                link.appendChild(img);
+            }),
+        );
 
-    lightbox.init();
-  }
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: ".prose",
+            children: "a[data-pswp-width]",
+            pswpModule: () => import("photoswipe"),
+        });
 
-  initLightbox();
+        lightbox.init();
+    }
+
+    initLightbox();
 </script>

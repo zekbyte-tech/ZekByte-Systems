@@ -7,131 +7,169 @@ const seo = await buildSEO({ title: "About" });
 ---
 
 <RootLayout seo={seo}>
-  <div class="bg-background min-h-screen">
-    <div class="mx-auto max-w-3xl px-6 py-12">
-      <article class="space-y-12">
-        <header>
-          <h1 class="mb-6">About</h1>
-        </header>
+    <div class="bg-background min-h-screen">
+        <div class="mx-auto max-w-3xl px-6 py-12">
+            <article class="space-y-12">
+                <header>
+                    <h1 class="mb-6">About</h1>
+                </header>
 
-        <section class="flex flex-col items-start gap-8 md:flex-row">
-          <div
-            class="bg-accent text-accent-foreground flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full"
-          >
-            <span class="text-4xl">AJ</span>
-          </div>
-          <div class="flex-1">
-            <h2 class="mb-4">Alex Johnson</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              Software engineer, content creator, and technical educator with a
-              passion for making complex topics accessible. I create in-depth
-              tutorials and articles about web development, DevOps, databases,
-              and modern software architecture.
-            </p>
-          </div>
-        </section>
+                <section class="flex flex-col items-start gap-8 md:flex-row">
+                    <div
+                        class="bg-accent text-accent-foreground flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full"
+                    >
+                        <span class="text-4xl">AJ</span>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="mb-4">Alex Johnson</h2>
+                        <p class="text-muted-foreground leading-relaxed">
+                            Software engineer, content creator, and technical
+                            educator with a passion for making complex topics
+                            accessible. I create in-depth tutorials and articles
+                            about web development, DevOps, databases, and modern
+                            software architecture.
+                        </p>
+                    </div>
+                </section>
 
-        <section class="border-border border-t pt-12">
-          <h2 class="mb-6">What I Do</h2>
-          <div class="text-muted-foreground space-y-4 leading-relaxed">
-            <p>
-              I've been writing code professionally for over a decade, working
-              on everything from small startups to large-scale distributed
-              systems. My focus is on practical, production-ready solutions that
-              solve real problems.
-            </p>
-            <p>
-              Through this blog and my YouTube channel, I share what I've
-              learned building and maintaining systems at scale. Each article is
-              designed to teach not just the "how" but also the "why" behind
-              technical decisions.
-            </p>
-            <p>Topics I cover include:</p>
-            <ul class="ml-4 list-inside list-disc space-y-2">
-              <li>
-                Modern web development with React, TypeScript, and Node.js
-              </li>
-              <li>
-                DevOps practices, CI/CD pipelines, and infrastructure automation
-              </li>
-              <li>Database design, optimization, and scaling strategies</li>
-              <li>Container orchestration with Kubernetes and Docker</li>
-              <li>System design and software architecture patterns</li>
-            </ul>
-          </div>
-        </section>
+                <section class="border-border border-t pt-12">
+                    <h2 class="mb-6">What I Do</h2>
+                    <div
+                        class="text-muted-foreground space-y-4 leading-relaxed"
+                    >
+                        <p>
+                            I've been writing code professionally for over a
+                            decade, working on everything from small startups to
+                            large-scale distributed systems. My focus is on
+                            practical, production-ready solutions that solve
+                            real problems.
+                        </p>
+                        <p>
+                            Through this blog and my YouTube channel, I share
+                            what I've learned building and maintaining systems
+                            at scale. Each article is designed to teach not just
+                            the "how" but also the "why" behind technical
+                            decisions.
+                        </p>
+                        <p>Topics I cover include:</p>
+                        <ul class="ml-4 list-inside list-disc space-y-2">
+                            <li>
+                                Modern web development with React, TypeScript,
+                                and Node.js
+                            </li>
+                            <li>
+                                DevOps practices, CI/CD pipelines, and
+                                infrastructure automation
+                            </li>
+                            <li>
+                                Database design, optimization, and scaling
+                                strategies
+                            </li>
+                            <li>
+                                Container orchestration with Kubernetes and
+                                Docker
+                            </li>
+                            <li>
+                                System design and software architecture patterns
+                            </li>
+                        </ul>
+                    </div>
+                </section>
 
-        <section class="border-border border-t pt-12">
-          <h2 class="mb-6">Connect</h2>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
-            >
-              <Icon name="lucide:youtube" class="text-accent h-6 w-6" />
-              <div>
-                <div>YouTube</div>
-                <div class="text-muted-foreground text-sm">Video tutorials</div>
-              </div>
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
-            >
-              <Icon name="lucide:github" class="text-accent h-6 w-6" />
-              <div>
-                <div>GitHub</div>
-                <div class="text-muted-foreground text-sm">
-                  Open source projects
-                </div>
-              </div>
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
-            >
-              <Icon name="lucide:twitter" class="text-accent h-6 w-6" />
-              <div>
-                <div>Twitter</div>
-                <div class="text-muted-foreground text-sm">
-                  Thoughts and updates
-                </div>
-              </div>
-            </a>
-            <a
-              href="mailto:hello@example.com"
-              class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
-            >
-              <Icon name="lucide:mail" class="text-accent h-6 w-6" />
-              <div>
-                <div>Email</div>
-                <div class="text-muted-foreground text-sm">Get in touch</div>
-              </div>
-            </a>
-          </div>
-        </section>
+                <section class="border-border border-t pt-12">
+                    <h2 class="mb-6">Connect</h2>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <a
+                            href="https://youtube.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
+                        >
+                            <Icon
+                                name="lucide:youtube"
+                                class="text-accent h-6 w-6"
+                            />
+                            <div>
+                                <div>YouTube</div>
+                                <div class="text-muted-foreground text-sm">
+                                    Video tutorials
+                                </div>
+                            </div>
+                        </a>
+                        <a
+                            href="https://github.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
+                        >
+                            <Icon
+                                name="lucide:github"
+                                class="text-accent h-6 w-6"
+                            />
+                            <div>
+                                <div>GitHub</div>
+                                <div class="text-muted-foreground text-sm">
+                                    Open source projects
+                                </div>
+                            </div>
+                        </a>
+                        <a
+                            href="https://twitter.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
+                        >
+                            <Icon
+                                name="lucide:twitter"
+                                class="text-accent h-6 w-6"
+                            />
+                            <div>
+                                <div>Twitter</div>
+                                <div class="text-muted-foreground text-sm">
+                                    Thoughts and updates
+                                </div>
+                            </div>
+                        </a>
+                        <a
+                            href="mailto:hello@example.com"
+                            class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
+                        >
+                            <Icon
+                                name="lucide:mail"
+                                class="text-accent h-6 w-6"
+                            />
+                            <div>
+                                <div>Email</div>
+                                <div class="text-muted-foreground text-sm">
+                                    Get in touch
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
 
-        <section class="border-border border-t pt-12">
-          <h2 class="mb-6">Support This Work</h2>
-          <p class="text-muted-foreground mb-4 leading-relaxed">
-            All content on this site is free and always will be. If you find it
-            valuable, the best way to support my work is to:
-          </p>
-          <ul
-            class="text-muted-foreground ml-4 list-inside list-disc space-y-2"
-          >
-            <li>Subscribe to my YouTube channel</li>
-            <li>Share articles with others who might find them helpful</li>
-            <li>Provide feedback on what topics you'd like to see covered</li>
-          </ul>
-        </section>
-      </article>
+                <section class="border-border border-t pt-12">
+                    <h2 class="mb-6">Support This Work</h2>
+                    <p class="text-muted-foreground mb-4 leading-relaxed">
+                        All content on this site is free and always will be. If
+                        you find it valuable, the best way to support my work is
+                        to:
+                    </p>
+                    <ul
+                        class="text-muted-foreground ml-4 list-inside list-disc space-y-2"
+                    >
+                        <li>Subscribe to my YouTube channel</li>
+                        <li>
+                            Share articles with others who might find them
+                            helpful
+                        </li>
+                        <li>
+                            Provide feedback on what topics you'd like to see
+                            covered
+                        </li>
+                    </ul>
+                </section>
+            </article>
+        </div>
     </div>
-  </div>
 </RootLayout>

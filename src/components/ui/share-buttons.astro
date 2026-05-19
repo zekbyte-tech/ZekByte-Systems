@@ -1,37 +1,38 @@
 ---
 import { Icon } from "astro-icon/components";
+
 const { title, url } = Astro.props;
 ---
 
 <div class="mb-12">
-  <h4 class="mb-4">Share this article</h4>
-  <div class="flex gap-3">
-    <a
-      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-      aria-label="Share on Twitter"
-    >
-      <Icon name="lucide:twitter" class="h-5 w-5" />
-    </a>
-    <a
-      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-      aria-label="Share on Facebook"
-    >
-      <Icon name="lucide:facebook" class="h-5 w-5" />
-    </a>
-    <a
-      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-      aria-label="Share on LinkedIn"
-    >
-      <Icon name="lucide:linkedin" class="h-5 w-5" />
-    </a>
-  </div>
+    <h4 class="mb-4">Share this article</h4>
+    <div class="flex gap-3">
+        <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+            aria-label="Share on Twitter"
+        >
+            <Icon name="lucide:twitter" class="h-5 w-5" />
+        </a>
+        <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+            aria-label="Share on Facebook"
+        >
+            <Icon name="lucide:facebook" class="h-5 w-5" />
+        </a>
+        <a
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
+            aria-label="Share on LinkedIn"
+        >
+            <Icon name="lucide:linkedin" class="h-5 w-5" />
+        </a>
+    </div>
 </div>

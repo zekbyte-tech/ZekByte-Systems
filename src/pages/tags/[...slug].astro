@@ -2,17 +2,16 @@
 import { Icon } from "astro-icon/components";
 import RootLayout from "../../layouts/RootLayout.astro";
 import { buildSEO } from "../../lib/build-seo";
+import { formatDate } from "../../lib/format-date";
 import { getPosts } from "../../lib/get-posts";
 import { getTags } from "../../lib/get-tags";
-import { formatDate } from "../../lib/format-date";
-import Banner from "../../components/blocks/banner.astro";
 
 export async function getStaticPaths() {
-  const tags = await getTags();
+    const tags = await getTags();
 
-  return tags.map((tag) => ({
-    params: { slug: tag },
-  }));
+    return tags.map((tag) => ({
+        params: { slug: tag },
+    }));
 }
 
 const { slug: currentTag } = Astro.params;
@@ -20,73 +19,76 @@ const { slug: currentTag } = Astro.params;
 const tags = await getTags();
 const posts = await getPosts();
 const filteredPosts = posts
-  .filter((post) => post.data.tags.includes(currentTag))
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+    .filter((post) => post.data.tags.includes(currentTag))
+    .sort(
+        (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+    );
 const seo = await buildSEO({ title: "Articles" });
 ---
 
 <RootLayout seo={seo}>
-  <div class="mx-auto max-w-5xl px-6 py-12">
-    <section class="mb-12">
-      <h1 class="mb-4">Articles Tagged "{currentTag}"</h1>
-    </section>
+    <div class="mx-auto max-w-5xl px-6 py-12">
+        <section class="mb-12">
+            <h1 class="mb-4">Articles Tagged "{currentTag}"</h1>
+        </section>
 
-    <!-- Tags -->
+        <!-- Tags -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2">
+                <a
+                    href="/tags"
+                    class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 transition-colors"
+                >
+                    All
+                </a>
 
-    <div class="mb-8">
-      <div class="flex flex-wrap gap-2">
-        <a
-          href="/tags"
-          class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 transition-colors"
-        >
-          All
-        </a>
-
-        {
-          tags.map((tag) => (
-            <a
-              href={`/tags/${tag}`}
-              class:list={[
-                "rounded-md px-4 py-2 transition-colors",
                 {
-                  "bg-primary text-primary-foreground": currentTag === tag,
+                    tags.map((tag: string) => (
+                        <a
+                            href={`/tags/${tag}`}
+                            class:list={[
+                                "rounded-md px-4 py-2 transition-colors",
+                                {
+                                    "bg-primary text-primary-foreground":
+                                        currentTag === tag,
 
-                  "bg-muted hover:bg-muted/70": currentTag !== tag,
-                },
-              ]}
-            >
-              {tag}
-            </a>
-          ))
-        }
-      </div>
+                                    "bg-muted hover:bg-muted/70":
+                                        currentTag !== tag,
+                                },
+                            ]}
+                        >
+                            {tag}
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Posts -->
+
+        <ul class="flex flex-col gap-1 py-8">
+            {
+                filteredPosts.map((post) => (
+                    <li>
+                        <a
+                            href={`/blog/${post.id}`}
+                            class="group flex items-start gap-2 rounded-xl border border-transparent px-3 transition-all duration-200 hover:underline"
+                        >
+                            <span class="text-muted-foreground mt-1 transition-transform duration-200">
+                                <Icon name="lucide:dot" class="size-6" />
+                            </span>
+
+                            <h2 class="group-hover:text-primary line-clamp-1 text-base font-medium transition-colors">
+                                {post.data.title}
+                            </h2>
+
+                            <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
+                                {formatDate(new Date(post.data.publishedAt))}
+                            </p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
     </div>
-
-    <!-- Posts -->
-
-    <ul class="flex flex-col gap-1 py-8">
-      {
-        filteredPosts.map((post) => (
-          <li>
-            <a
-              href={`/blog/${post.id}`}
-              class="group flex items-start gap-2 rounded-xl border border-transparent px-3 transition-all duration-200 hover:underline"
-            >
-              <span class="text-muted-foreground mt-1 transition-transform duration-200">
-                <Icon name="lucide:dot" class="size-6" />
-              </span>
-
-              <h2 class="group-hover:text-primary line-clamp-1 text-base font-medium transition-colors">
-                {post.data.title}
-              </h2>
-
-              <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
-                {formatDate(new Date(post.data.publishedAt))}
-              </p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
 </RootLayout>
