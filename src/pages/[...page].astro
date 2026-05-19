@@ -1,0 +1,40 @@
+---
+import RootLayout from "../layouts/RootLayout.astro";
+import ArticleCardWide from "../components/ui/article-card.astro";
+import Pagination from "../components/ui/pagination.astro";
+import Banner from "../components/blocks/banner.astro";
+import { getPosts } from "../lib/get-posts";
+import { getHome } from "../lib/get-home";
+import { getTags } from "../lib/get-tags";
+import { buildSEO } from "../lib/build-seo";
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await getPosts();
+
+  return paginate(posts, {
+    pageSize: 2,
+  });
+}
+
+const { page } = Astro.props;
+const posts = page.data;
+const tags = await getTags();
+const home = await getHome();
+
+const seo = await buildSEO({ title: "Articles" });
+---
+
+<RootLayout seo={seo}>
+  {home?.data.banner && <Banner {...home.data.banner} />}
+
+  <!-- Posts -->
+
+  <div
+    class="container mx-auto grid gap-6 pt-24 pb-16 md:grid-cols-2 lg:grid-cols-3"
+  >
+    {posts.map((post) => <ArticleCardWide post={post} />)}
+  </div>
+
+  <!-- Pagination -->
+  <Pagination page={page} baseUrl="/page" firstPageUrl={"/"} />
+</RootLayout>

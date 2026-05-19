@@ -1,8 +1,17 @@
 ---
-import { Icon } from "astro-icon/components";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import RootLayout from "../../layouts/RootLayout.astro";
+import ShareButtons from "../../components/ui/share-buttons.astro";
+import Lightbox from "../../components/lightbox.astro";
+import RelatedPosts from "../../components/blocks/related-posts.astro";
+import BlogHeader from "../../components/ui/blog-header.astro";
+import BlogContent from "../../components/ui/blog-content.astro";
+import BlogCTA from "../../components/ui/blog-cta.astro";
+import BackButton from "../../components/ui/back-button.astro";
+import YoutubeEmbed from "../../components/ui/youtube-embed.astro";
 import { getRelatedPosts } from "../../lib/get-related-posts";
+import { buildSEO } from "../../lib/build-seo";
+import { buildBlogPostSchema } from "../../lib/build-schema";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -20,183 +29,51 @@ const { Content } = await render(post);
 const relatedPosts = getRelatedPosts(post, posts);
 
 const site = Astro.site;
-const canonicalURL = `${site}blog/${post.id}`;
-const image = `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`;
+const canonical = new URL(`/blog/${post.id}`, site).toString();
+const image = new URL(
+  `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`,
+).toString();
+
+const seo = await buildSEO({
+  title: post.data.title,
+  description: post.data.excerpt,
+  image,
+  canonical,
+});
+
+const schema = await buildBlogPostSchema({
+  title: post?.data.title,
+  description: post?.data.excerpt,
+  publishedTime: post?.data.publishedAt,
+  image: image,
+  slug: post?.id,
+});
 ---
 
-<RootLayout
-  title={post.data.title}
-  description={post.data.excerpt}
-  image={image}
-  canonicalURL={canonicalURL}
-  type="article"
->
+<RootLayout seo={seo} schema={schema}>
   <div class="bg-background min-h-screen">
     <article class="mx-auto max-w-4xl px-6 py-12">
-      <a
-        href="/blog"
-        class="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 no-underline"
-      >
-        <Icon name="lucide:arrow-left" class="h-4 w-4" />
-        Back to Articles
-      </a>
+      <BackButton label="Back to Articles" href="/" />
 
-      <header class="mb-8">
-        <div class="mb-4 flex flex-wrap gap-2">
-          {
-            post.data.tags.map((tag) => (
-              <a
-                href={`/tags/${tag}`}
-                class="bg-muted text-muted-foreground flex items-center gap-1 rounded-full px-3 py-1 text-sm"
-              >
-                <Icon name="lucide:tag" class="h-3 w-3" />
-                {tag}
-              </a>
-            ))
-          }
-        </div>
+      <BlogHeader post={post} />
 
-        <h1 class="mb-6 leading-tight">{post.data.title}</h1>
+      <YoutubeEmbed id={post.data.youtubeId} title={post.data.title} />
 
-        <div
-          class="text-muted-foreground border-border flex flex-wrap items-center gap-6 border-b pb-6"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="bg-accent text-accent-foreground flex h-10 w-10 items-center justify-center rounded-full"
-            >
-              Au
-            </div>
-            <div>
-              <div class="text-foreground">
-                {post.data.author}
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-1">
-            <Icon name="lucide:calendar" class="h-4 w-4" />
-            <time
-              >{
-                new Date(post.data.publishedAt).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })
-              }</time
-            >
-          </div>
-        </div>
-      </header>
+      <BlogContent>
+        <Content />
+      </BlogContent>
 
-      <div class="mb-12">
-        <div
-          class="bg-muted border-border aspect-video overflow-hidden rounded-lg border"
-        >
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${post.data.youtubeId}`}
-            title={post.data.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            class="h-full w-full"></iframe>
-        </div>
-        <p class="text-muted-foreground mt-3 text-center text-sm">
-          Watch the full tutorial on YouTube
-        </p>
-      </div>
+      <BlogCTA
+        title="Enjoyed this article?"
+        subtitle="Subscribe to my YouTube channel for more content like this"
+        label="Subscribe on YouTube"
+        href="https://youtube.com/"
+      />
 
-      <div class="prose prose-neutral dark:prose-invert mb-12 max-w-none">
-        <div class="leading-relaxed" style={{ whiteSpace: "pre-wrap" }}>
-          <Content />
-        </div>
-      </div>
+      <ShareButtons title={post.data.title} url={canonical} />
 
-      <div class="border-border mb-12 border-y py-8">
-        <div
-          class="flex flex-col items-center justify-between gap-6 sm:flex-row"
-        >
-          <div>
-            <h4 class="mb-2">Enjoyed this article?</h4>
-            <p class="text-muted-foreground m-0">
-              Subscribe to my YouTube channel for more content like this
-            </p>
-          </div>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-accent text-accent-foreground hover:bg-accent/90 inline-flex items-center gap-2 rounded-md px-6 py-3 whitespace-nowrap no-underline transition-colors"
-          >
-            <Icon name="lucide:youtube" class="h-5 w-5" />
-            Subscribe on YouTube
-          </a>
-        </div>
-      </div>
-
-      <div class="mb-12">
-        <h4 class="mb-4">Share this article</h4>
-        <div class="flex gap-3">
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent("url")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-            aria-label="Share on Twitter"
-          >
-            <Icon name="lucide:twitter" class="h-5 w-5" />
-          </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("url")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-            aria-label="Share on Facebook"
-          >
-            <Icon name="lucide:facebook" class="h-5 w-5" />
-          </a>
-          <a
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("url")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="border-border hover:bg-muted text-foreground rounded-md border p-3 transition-colors"
-            aria-label="Share on LinkedIn"
-          >
-            <Icon name="lucide:linkedin" class="h-5 w-5" />
-          </a>
-        </div>
-      </div>
-
-      {
-        relatedPosts.length > 0 && (
-          <div class="border-border border-t pt-12">
-            <h2 class="mb-8">Related Articles</h2>
-            <div class="grid gap-6 md:grid-cols-3">
-              {relatedPosts.map((relatedPost) => (
-                <a
-                  href={`/blog/${relatedPost.id}`}
-                  class="group block no-underline"
-                >
-                  <article class="border-border hover:border-foreground/20 bg-card overflow-hidden rounded-lg border transition-colors">
-                    <div class="bg-muted relative aspect-video">
-                      <img
-                        src={`https://img.youtube.com/vi/${relatedPost.data.youtubeId}/maxresdefault.jpg`}
-                        alt={relatedPost.data.title}
-                        class="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div class="p-4">
-                      <h3 class="group-hover:text-accent transition-colors">
-                        {relatedPost.data.title}
-                      </h3>
-                    </div>
-                  </article>
-                </a>
-              ))}
-            </div>
-          </div>
-        )
-      }
+      <RelatedPosts title="Related Articles" posts={relatedPosts} />
     </article>
   </div>
+  <Lightbox />
 </RootLayout>

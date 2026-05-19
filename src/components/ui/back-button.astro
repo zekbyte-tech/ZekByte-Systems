@@ -1,0 +1,12 @@
+---
+import { Icon } from "astro-icon/components";
+const { label, href } = Astro.props;
+---
+
+<a
+  href={href}
+  class="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 no-underline"
+>
+  <Icon name="lucide:arrow-left" class="h-4 w-4" />
+  {label}
+</a>

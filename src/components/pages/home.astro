@@ -1,0 +1,41 @@
+---
+import RootLayout from "../../layouts/RootLayout.astro";
+import ArticleCardWide from "../../components/ui/article-card.astro";
+import Pagination from "../../components/ui/pagination.astro";
+import { getPosts } from "../../lib/get-posts";
+import { buildSEO } from "../../lib/build-seo";
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await getPosts();
+
+  return paginate(posts, {
+    pageSize: 2,
+  });
+}
+
+const { page } = Astro.props;
+const posts = page.data;
+const seo = await buildSEO({ title: "Articles" });
+---
+
+<RootLayout seo={seo}>
+  <section class="mb-12">
+    <div class="mx-auto max-w-5xl px-6 py-12">
+      <h1 class="mb-4">Articles</h1>
+
+      <p class="text-muted-foreground max-w-2xl">
+        Browse through all articles covering web development, DevOps, databases,
+        and software engineering best practices.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts -->
+
+  <div class="container mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {posts.map((post) => <ArticleCardWide post={post} />)}
+  </div>
+
+  <!-- Pagination -->
+  <Pagination page={page} baseUrl="/page" firstPageUrl={"/"} />
+</RootLayout>

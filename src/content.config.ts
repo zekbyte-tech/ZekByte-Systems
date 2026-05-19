@@ -51,6 +51,11 @@ const site = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    url: z.string(),
+    author: z.string(),
+    twitter: z.string(),
+    locale: z.string(),
+    logo: z.string(),
     menus,
     social,
     footer,

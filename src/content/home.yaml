@@ -1,14 +1,14 @@
 banner:
-    title: "Technical Content & Tutorials"
-    description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
-    buttons:
-        primary:
-            label: "Browse Articles"
-            href: "/blog"
-            icon: "lucide:arrow-right"
+  title: "Technical Content & Tutorials"
+  description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+  buttons:
+    primary:
+      label: "Browse Articles"
+      href: "/tags"
+      icon: "lucide:arrow-right"
 
-        secondary:
-            label: "Watch on YouTube"
-            href: "https://youtube.com"
-            icon: "lucide:youtube"
-            target: "_blank"
+    secondary:
+      label: "Watch on YouTube"
+      href: "https://youtube.com"
+      icon: "lucide:youtube"
+      target: "_blank"

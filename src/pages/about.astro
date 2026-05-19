@@ -1,9 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import RootLayout from "../layouts/RootLayout.astro";
+import { buildSEO } from "../lib/build-seo";
+
+const seo = await buildSEO({ title: "About" });
 ---
 
-<RootLayout title="About">
+<RootLayout seo={seo}>
   <div class="bg-background min-h-screen">
     <div class="mx-auto max-w-3xl px-6 py-12">
       <article class="space-y-12">

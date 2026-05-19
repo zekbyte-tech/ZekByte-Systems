@@ -1,28 +1,33 @@
 title: "TechBlog"
 description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+url: "https://techlynqtechlyn-website.iago-084.workers.dev/"
+author: "John Doe"
+twitter: "@johndoe"
+locale: "en_US"
+logo: "/logo.png"
 
 menus:
-    main:
-        - name: "Home"
-          href: "/"
+  main:
+    - name: "Home"
+      href: "/"
 
-        - name: "Blog"
-          href: "/blog"
+    - name: "Tags"
+      href: "/tags"
 
-        - name: "About"
-          href: "/about"
+    - name: "About"
+      href: "/about"
 
 social:
-    main:
-        - name: "Twitter"
-          href: "https://twitter.com"
-          icon: "lucide:twitter"
+  main:
+    - name: "Twitter"
+      href: "https://twitter.com"
+      icon: "lucide:twitter"
 
-        - name: "GitHub"
-          href: "https://github.com"
-          icon: "lucide:github"
+    - name: "GitHub"
+      href: "https://github.com"
+      icon: "lucide:github"
 
 footer:
-    title: "TechBlog"
-    description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
-    copyright: "© 2026 TechBlog. All rights reserved."
+  title: "TechBlog"
+  description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+  copyright: "© 2026 TechBlog. All rights reserved."

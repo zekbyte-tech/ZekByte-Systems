@@ -1,0 +1,40 @@
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  async function initLightbox() {
+    const images = document.querySelectorAll(".prose img");
+
+    await Promise.all(
+      [...images].map(async (img) => {
+        if (img.parentElement?.tagName === "A") return;
+
+        const image = new Image();
+        image.src = img.src;
+
+        await image.decode().catch(() => {});
+
+        const link = document.createElement("a");
+
+        link.href = img.src;
+
+        link.dataset.pswpWidth = image.naturalWidth;
+        link.dataset.pswpHeight = image.naturalHeight;
+        link.dataset.pswpCaption = img.alt || "";
+
+        img.parentNode.insertBefore(link, img);
+        link.appendChild(img);
+      }),
+    );
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: ".prose",
+      children: "a[data-pswp-width]",
+      pswpModule: () => import("photoswipe"),
+    });
+
+    lightbox.init();
+  }
+
+  initLightbox();
+</script>

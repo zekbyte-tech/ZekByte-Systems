@@ -2,59 +2,41 @@
 import "../styles/index.css";
 import Header from "../components/blocks/header.astro";
 import Footer from "../components/blocks/footer.astro";
+import SEO from "../components/seo.astro";
+import JSONLD from "../components/jsonld.astro";
 
-import { getEntry } from "astro:content";
+import { getSite } from "../lib/get-site";
 
-export interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  canonicalURL?: string;
-  noindex?: boolean;
-  type?: "website" | "article";
-}
+const site = await getSite();
 
-const site = await getEntry("site", "site");
+type Props = {
+  seo: any;
+  schema?: object;
+};
 
-const {
-  title = site?.data.title,
-  description = site?.data.description,
-  image = "/og-image.jpg",
-  canonicalURL,
-  noindex = false,
-  type = "website",
-} = Astro.props;
-
-const siteURL = Astro.site ?? new URL("https://example.com");
-const currentURL = new URL(Astro.url.pathname, siteURL);
-
-const canonical = canonicalURL
-  ? new URL(canonicalURL, siteURL).toString()
-  : currentURL.toString();
-
-const pageTitle =
-  title === site?.data.title ? title : `${title} | ${site?.data.title}`;
-const ogImage = new URL(image, siteURL).toString();
+const { seo, schema } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <!-- Basic -->
+    <SEO {...seo} />
+    {schema && <JSONLD data={schema} />}
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonical} />
 
     <!-- Theme -->
-    <meta name="theme-color" content="#0f0f0f" />
-
-    <!-- Robots -->
     <meta
-      name="robots"
-      content={noindex ? "noindex, nofollow" : "index, follow"}
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0f0f0f"
     />
 
     <!-- Sitemap -->
@@ -66,40 +48,12 @@ const ogImage = new URL(image, siteURL).toString();
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content={type} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content={site?.data.title} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content={pageTitle} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
     <!-- RSS -->
     <link
       rel="alternate"
       type="application/rss+xml"
       title="RSS Feed"
       href="/rss.xml"
-    />
-
-    <!-- Structured Data -->
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: site?.data.title,
-        url: siteURL.toString(),
-        logo: `${siteURL}logo.png`,
-      })}
     />
 
     <!-- Prevent flash -->
@@ -117,8 +71,6 @@ const ogImage = new URL(image, siteURL).toString();
         }
       })();
     </script>
-
-    <slot name="head" />
   </head>
 
   <body
