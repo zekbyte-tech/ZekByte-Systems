@@ -21,7 +21,7 @@ const posts = page.data;
 const tags = await getTags();
 const home = await getHome();
 
-const seo = await buildSEO({ title: "Articles" });
+const seo = await buildSEO();
 ---
 
 <RootLayout seo={seo}>
