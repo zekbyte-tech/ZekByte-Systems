@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+
+type Props = { connect: CollectionEntry<"about">["data"]["connect"] };
+
+const { connect } = Astro.props;
+---
+
+<section class="border-border border-t pt-12">
+    <h2 class="mb-6">Connect</h2>
+    <div class="grid gap-4 sm:grid-cols-2">
+        {
+            connect &&
+                connect.map((item) => (
+                    <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="border-border hover:border-foreground/20 text-foreground flex items-center gap-3 rounded-lg border p-4 no-underline transition-colors"
+                    >
+                        <Icon name={item.icon} class="text-accent h-6 w-6" />
+                        <div>
+                            <div>{item.name}</div>
+                            <div class="text-muted-foreground text-sm">
+                                {item.description}
+                            </div>
+                        </div>
+                    </a>
+                ))
+        }
+    </div>
+</section>

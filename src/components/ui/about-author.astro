@@ -1,0 +1,22 @@
+---
+const { name, description } = Astro.props;
+
+const initials = name
+    .split(" ")
+    .slice(0, 2)
+    .map((name: string) => name.split("").at(0));
+---
+
+<section class="my-16 flex flex-col items-start gap-8 md:flex-row">
+    <div
+        class="bg-accent text-accent-foreground flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full"
+    >
+        <span class="text-4xl">{initials}</span>
+    </div>
+    <div class="flex-1">
+        <h2 class="mb-4">{name}</h2>
+        <p class="text-muted-foreground leading-relaxed">
+            {description}
+        </p>
+    </div>
+</section>
