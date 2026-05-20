@@ -1,5 +1,5 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import RelatedPosts from "../../components/blocks/related-posts.astro";
 import Lightbox from "../../components/lightbox.astro";
 import BackButton from "../../components/ui/back-button.astro";
@@ -11,10 +11,11 @@ import YoutubeEmbed from "../../components/ui/youtube-embed.astro";
 import RootLayout from "../../layouts/RootLayout.astro";
 import { buildBlogPostSchema } from "../../lib/build-schema";
 import { buildSEO } from "../../lib/build-seo";
+import { getPosts } from "../../lib/get-posts";
 import { getRelatedPosts } from "../../lib/get-related-posts";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
+    const posts = getPosts();
 
     return posts.map((post) => ({
         params: { slug: post.id },
@@ -24,7 +25,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const posts = await getCollection("blog");
+const posts = getPosts();
 
 const { Content } = await render(post);
 const relatedPosts = getRelatedPosts(post, posts);
@@ -35,14 +36,14 @@ const image = new URL(
     `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`,
 ).toString();
 
-const seo = await buildSEO({
+const seo = buildSEO({
     title: post.data.title,
     description: post.data.excerpt,
     image,
     canonical,
 });
 
-const schema = await buildBlogPostSchema({
+const schema = buildBlogPostSchema({
     title: post?.data.title,
     description: post?.data.excerpt,
     publishedTime: post?.data.publishedAt.toISOString(),
@@ -52,29 +53,27 @@ const schema = await buildBlogPostSchema({
 ---
 
 <RootLayout seo={seo} schema={schema}>
-    <div class="bg-background min-h-screen">
-        <article class="mx-auto max-w-4xl px-6 py-12">
-            <BackButton label="Back to Articles" href="/" />
+    <article class="mx-auto max-w-4xl px-6 py-12">
+        <BackButton label="Back to Articles" href="/" />
 
-            <BlogHeader post={post} />
+        <BlogHeader post={post} />
 
-            <YoutubeEmbed id={post.data.youtubeId} title={post.data.title} />
+        <YoutubeEmbed id={post.data.youtubeId} title={post.data.title} />
 
-            <BlogContent>
-                <Content />
-            </BlogContent>
+        <BlogContent>
+            <Content />
+        </BlogContent>
 
-            <BlogCTA
-                title="Enjoyed this article?"
-                subtitle="Subscribe to my YouTube channel for more content like this"
-                label="Subscribe on YouTube"
-                href="https://youtube.com/"
-            />
+        <BlogCTA
+            title="Enjoyed this article?"
+            subtitle="Subscribe to my YouTube channel for more content like this"
+            label="Subscribe on YouTube"
+            href="https://youtube.com/"
+        />
 
-            <ShareButtons title={post.data.title} url={canonical} />
+        <ShareButtons title={post.data.title} url={canonical} />
 
-            <RelatedPosts title="Related Articles" posts={relatedPosts} />
-        </article>
-    </div>
+        <RelatedPosts title="Related Articles" posts={relatedPosts} />
+    </article>
     <Lightbox />
 </RootLayout>

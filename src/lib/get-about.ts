@@ -2,8 +2,9 @@ import { getEntry } from "astro:content";
 
 const entry = await getEntry("about", "about");
 
-if (!entry) {
-    throw new Error("Missing required file 'src/content/about.md'.");
-}
+export function getAbout() {
+    if (!entry)
+        throw new Error("Missing required file 'src/content/about.mdx'.");
 
-export default entry;
+    return entry;
+}

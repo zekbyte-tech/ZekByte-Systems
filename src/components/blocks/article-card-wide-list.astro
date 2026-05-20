@@ -1,0 +1,12 @@
+---
+import { type CollectionEntry } from "astro:content";
+import ArticleCardWide from "../ui/article-card-wide.astro";
+
+type Props = { posts: CollectionEntry<"blog">[] };
+
+const { posts } = Astro.props;
+---
+
+<section class="space-y-8">
+    {posts.map((post) => <ArticleCardWide post={post} />)}
+</section>

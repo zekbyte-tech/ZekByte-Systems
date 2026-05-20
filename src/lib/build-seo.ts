@@ -8,14 +8,14 @@ export type SEOProps = {
     noindex?: boolean;
 };
 
-export async function buildSEO({
+export function buildSEO({
     title,
     description,
     image,
     canonical,
     noindex = false,
 }: SEOProps) {
-    const site = await getSite();
+    const site = getSite();
 
     const seo = {
         title: title ? `${title} | ${site?.data.title}` : site?.data.title,

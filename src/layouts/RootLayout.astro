@@ -1,12 +1,10 @@
 ---
 import "../styles/index.css";
-import Footer from "../components/blocks/footer.astro";
-import Header from "../components/blocks/header.astro";
+import Footer from "../components/blocks/site-footer.astro";
+import Header from "../components/blocks/site-header.astro";
 import JSONLD from "../components/jsonld.astro";
 import SEO from "../components/seo.astro";
 import { getSite } from "../lib/get-site";
-
-const site = await getSite();
 
 type Props = {
     seo: any;
@@ -14,6 +12,9 @@ type Props = {
 };
 
 const { seo, schema } = Astro.props;
+
+const site = getSite();
+const GA_ID = site.data.googleAnalytics;
 ---
 
 <!doctype html>
@@ -68,6 +69,30 @@ const { seo, schema } = Astro.props;
             title="RSS Feed"
             href="/rss.xml"
         />
+
+        <!-- Google Analytics -->
+        {
+          GA_ID && (
+            <>
+              <script
+                is:inline
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              ></script>
+
+              <script is:inline define:vars={{ GA_ID }}>
+                window.dataLayer = window.dataLayer || [];
+
+                function gtag() {
+                  dataLayer.push(arguments);
+                }
+
+                gtag('js', new Date());
+                gtag('config', GA_ID);
+              </script>
+            </>
+          )
+        }
 
         <!-- Prevent flash -->
         <script is:inline>

@@ -1,0 +1,10 @@
+---
+type Props = { count: number };
+
+const { count } = Astro.props;
+---
+
+<div class="text-muted-foreground mb-6 text-sm">
+    Showing {count}{" "}
+    {count === 1 ? "article" : "articles"}
+</div>

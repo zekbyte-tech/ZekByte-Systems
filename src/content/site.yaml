@@ -5,6 +5,7 @@ author: "John Doe"
 twitter: "@johndoe"
 locale: "en_US"
 logo: "/logo.png"
+googleAnalytics: ""
 
 menus:
   main:

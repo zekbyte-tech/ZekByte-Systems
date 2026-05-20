@@ -1,0 +1,40 @@
+---
+type Props = { allTags: string[]; currentTag: string };
+
+const { allTags, currentTag } = Astro.props;
+---
+
+<div class="mb-8 flex flex-wrap gap-2">
+    <a
+        href={`/tags`}
+        class:list={[
+            "rounded-md px-4 py-2 transition-colors",
+            {
+                "bg-primary text-primary-foreground": currentTag === "all",
+
+                "bg-bright/50 hover:bg-bright/40": currentTag !== "all",
+            },
+        ]}
+    >
+        all
+    </a>
+
+    {
+        allTags.map((tag: string) => (
+            <a
+                href={`/tags/${tag}`}
+                class:list={[
+                    "rounded-md px-4 py-2 transition-colors",
+                    {
+                        "bg-primary text-primary-foreground":
+                            currentTag === tag,
+
+                        "bg-bright/50 hover:bg-bright/40": currentTag !== tag,
+                    },
+                ]}
+            >
+                {tag}
+            </a>
+        ))
+    }
+</div>

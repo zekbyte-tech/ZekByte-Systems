@@ -1,48 +1,41 @@
 ---
-import { getEntry, render } from "astro:content";
+import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Lightbox from "../components/lightbox.astro";
 import AboutAuthor from "../components/ui/about-author.astro";
 import AboutConnect from "../components/ui/about-connect.astro";
-import AboutHeader from "../components/ui/about-header.astro";
 import BlogContent from "../components/ui/blog-content.astro";
+import PageHeader from "../components/ui/page-header.astro";
 import RootLayout from "../layouts/RootLayout.astro";
 import { buildSEO } from "../lib/build-seo";
+import { getAbout } from "../lib/get-about";
 
 type Props = CollectionEntry<"about">;
 
-const about = await getEntry("about", "about");
-
-if (!about) {
-    throw new Error("Missing required file 'src/content/about.mdx'.");
-}
-
-const { Content } = await render(about);
-
+const about = getAbout();
 const site = Astro.site;
 const canonical = new URL(`/blog/${about.id}`, site).toString();
 
-const seo = await buildSEO({
+const seo = buildSEO({
     title: about.data.title,
     description: about.data.description,
     canonical,
 });
+
+const { Content } = await render(about);
 ---
 
 <RootLayout seo={seo}>
-    <div class="bg-background min-h-screen">
-        <article class="mx-auto max-w-4xl px-6 py-12">
-            <AboutHeader title={about.data.title} />
-            {about.data.author && <AboutAuthor {...about.data.author} />}
-            <BlogContent>
-                <Content />
-            </BlogContent>
-            {
-                about.data.connect && (
-                    <AboutConnect connect={about.data.connect} />
-                )
-            }
-        </article>
-    </div>
+    <article class="mx-auto max-w-4xl px-6 py-12">
+        {about.data.title && <PageHeader title={about.data.title} />}
+
+        {about.data.author && <AboutAuthor {...about.data.author} />}
+
+        <BlogContent>
+            <Content />
+        </BlogContent>
+
+        {about.data.connect && <AboutConnect connect={about.data.connect} />}
+    </article>
     <Lightbox />
 </RootLayout>

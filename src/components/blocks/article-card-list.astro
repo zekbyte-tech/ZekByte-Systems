@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ArticleCard from "../ui/article-card.astro";
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section
+    class="container mx-auto grid gap-6 pt-24 pb-16 md:grid-cols-2 lg:grid-cols-3"
+>
+    {posts.map((post) => <ArticleCard post={post} />)}
+</section>

@@ -1,7 +1,7 @@
 import { getSite } from "../lib/get-site";
 
-export async function buildWebsiteSchema() {
-    const site = await getSite();
+export function buildWebsiteSchema() {
+    const site = getSite();
 
     return {
         "@context": "https://schema.org",
@@ -11,8 +11,8 @@ export async function buildWebsiteSchema() {
     };
 }
 
-export async function buildPersonSchema() {
-    const site = await getSite();
+export function buildPersonSchema() {
+    const site = getSite();
 
     return {
         "@context": "https://schema.org",
@@ -22,11 +22,11 @@ export async function buildPersonSchema() {
     };
 }
 
-export async function buildBlogIndexSchema(page: {
+export function buildBlogIndexSchema(page: {
     title: string;
     description: string;
 }) {
-    const site = await getSite();
+    const site = getSite();
 
     return {
         "@context": "https://schema.org",
@@ -61,7 +61,7 @@ export async function buildBlogPostSchema(post: {
     image: string;
     slug: string;
 }) {
-    const site = await getSite();
+    const site = getSite();
 
     return {
         "@context": "https://schema.org",

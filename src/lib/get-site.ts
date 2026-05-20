@@ -1,5 +1,10 @@
 import { getEntry } from "astro:content";
 
-export async function getSite() {
-    return await getEntry("site", "site");
+const entry = await getEntry("site", "site");
+
+export function getSite() {
+    if (!entry)
+        throw new Error("Missing required file 'src/content/site.yaml'.");
+
+    return entry;
 }

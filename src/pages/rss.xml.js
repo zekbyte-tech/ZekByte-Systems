@@ -1,9 +1,10 @@
 import rss from "@astrojs/rss";
-import { getCollection, getEntry } from "astro:content";
+import { getSite } from "../lib/get-site";
+import { getPosts } from "../lib/get-posts";
 
-export async function GET(context) {
-    const site = await getEntry("site", "site");
-    const posts = await getCollection("blog");
+export function GET(context) {
+    const site = getSite()
+    const posts = getPosts()
 
     return rss({
         title: site.data.title,

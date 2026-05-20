@@ -1,114 +1,41 @@
 ---
 import type { GetStaticPaths, Page } from "astro";
-import { Icon } from "astro-icon/components";
-import ArticleCardWide from "../../components/ui/article-card-wide.astro";
+import ArticleCardWideList from "../../components/blocks/article-card-wide-list.astro";
+import ArticleCount from "../../components/ui/article-count.astro";
+import PageHeader from "../../components/ui/page-header.astro";
+import Pagination from "../../components/ui/pagination.astro";
 import RootLayout from "../../layouts/RootLayout.astro";
 import { buildSEO } from "../../lib/build-seo";
 import { getPosts } from "../../lib/get-posts";
-import { getTags } from "../../lib/get-tags";
 
 interface Props {
     page: Page<Awaited<ReturnType<typeof getPosts>>[number]>;
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-    const posts = await getPosts();
+    const posts = getPosts();
 
     return paginate(posts, {
         pageSize: 12,
     });
 };
 
-const tags = await getTags();
-
-// const { page } = Astro.props;
-// const posts = page.data;
-
 const {
     page: postsPage,
     page: { data: postsData },
 } = Astro.props;
 
-const seo = await buildSEO({ title: "Blog" });
+const seo = buildSEO({ title: "Blog" });
 ---
 
 <RootLayout seo={seo}>
-    <div class="bg-background min-h-screen">
-        <div class="mx-auto max-w-5xl px-6 py-12">
-            <section class="mb-12">
-                <h1 class="mb-4">Articles</h1>
+    <div class="mx-auto max-w-5xl px-6 py-12">
+        <PageHeader title="Articles" />
 
-                <p class="text-muted-foreground max-w-2xl">
-                    Browse through all articles covering web development,
-                    DevOps, databases, and software engineering best practices.
-                </p>
-            </section>
+        {postsData && <ArticleCount count={postsData.length} />}
 
-            <!-- Count -->
+        {postsData && <ArticleCardWideList posts={postsData} />}
 
-            <div class="text-muted-foreground mb-6 text-sm">
-                Showing {postsData.length}{" "}
-                {postsData.length === 1 ? "article" : "articles"}
-            </div>
-
-            <!-- Posts -->
-
-            <div class="space-y-8">
-                {postsData.map((post) => <ArticleCardWide post={post} />)}
-            </div>
-
-            <!-- Pagination -->
-
-            <div class="mt-12 flex items-center justify-center gap-2">
-                {
-                    postsPage.url.prev && (
-                        <a
-                            href={postsPage.url.prev}
-                            class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 no-underline transition-colors"
-                        >
-                            Previous
-                        </a>
-                    )
-                }
-
-                {
-                    Array.from(
-                        { length: postsPage.lastPage },
-                        (_, i) => i + 1,
-                    ).map((pageNumber) => (
-                        <a
-                            href={
-                                pageNumber === 1
-                                    ? "/blog"
-                                    : `/blog/${pageNumber}`
-                            }
-                            class:list={[
-                                "rounded-md px-4 py-2 no-underline transition-colors",
-                                {
-                                    "bg-primary text-primary-foreground":
-                                        pageNumber === postsPage.currentPage,
-
-                                    "bg-muted hover:bg-muted/70":
-                                        pageNumber !== postsPage.currentPage,
-                                },
-                            ]}
-                        >
-                            {pageNumber}
-                        </a>
-                    ))
-                }
-
-                {
-                    postsPage.url.next && (
-                        <a
-                            href={postsPage.url.next}
-                            class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 no-underline transition-colors"
-                        >
-                            Next
-                        </a>
-                    )
-                }
-            </div>
-        </div>
+        {postsPage && <Pagination page={postsPage} baseUrl="/blog" />}
     </div>
 </RootLayout>
