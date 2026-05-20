@@ -44,38 +44,6 @@ const seo = await buildSEO({ title: "Blog" });
                 </p>
             </section>
 
-            <!-- Tags -->
-
-            <div class="mb-8">
-                <div
-                    class="text-muted-foreground mb-3 flex items-center gap-2 text-sm"
-                >
-                    <Icon name="lucide:filter" class="h-4 w-4" />
-
-                    Filter by topic:
-                </div>
-
-                <div class="flex flex-wrap gap-2">
-                    <a
-                        href="/blog"
-                        class="bg-primary text-primary-foreground rounded-md px-4 py-2 transition-colors"
-                    >
-                        All
-                    </a>
-
-                    {
-                        tags.map((tag) => (
-                            <a
-                                href={`/tags/${tag}`}
-                                class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 transition-colors"
-                            >
-                                {tag}
-                            </a>
-                        ))
-                    }
-                </div>
-            </div>
-
             <!-- Count -->
 
             <div class="text-muted-foreground mb-6 text-sm">

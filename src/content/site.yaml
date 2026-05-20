@@ -11,6 +11,9 @@ menus:
     - name: "Home"
       href: "/"
 
+    - name: "Blog"
+      href: "/blog"
+
     - name: "Tags"
       href: "/tags"
 
