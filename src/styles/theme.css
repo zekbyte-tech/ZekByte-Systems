@@ -14,8 +14,12 @@
   --secondary-foreground: #1a1a1a;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
-  --accent: #e74c3c;
+  /* --accent: #e74c3c; */
+  /* --accent-foreground: #ffffff; */
+  --accent: #6fb4e4;
   --accent-foreground: #ffffff;
+  --bright: #6fb4e4;
+  --bright-foreground: #ffffff;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: #e5e5e5;
@@ -54,8 +58,12 @@
   --secondary-foreground: #ededed;
   --muted: #262626;
   --muted-foreground: #a3a3a3;
-  --accent: #e74c3c;
-  --accent-foreground: #ffffff;
+  /* --accent: #e74c3c; */
+  /* --accent-foreground: #ffffff; */
+  --accent: #afdbf5;
+  --accent-foreground: #1a1a1a;
+  --bright: #afdbf5;
+  --bright-foreground: #1a1a1a;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: #262626;
@@ -93,6 +101,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-bright: var(--bright);
+  --color-bright-foreground: var(--bright-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -186,6 +196,10 @@
   /* Reading optimized line height and spacing */
   article p {
     line-height: 1.75;
+  }
+
+  .prose p a {
+      color: var(--color-bright) !important;
   }
 
   /* Code blocks */

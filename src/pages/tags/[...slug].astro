@@ -37,7 +37,7 @@ const seo = await buildSEO({ title: "Articles" });
             <div class="flex flex-wrap gap-2">
                 <a
                     href="/tags"
-                    class="bg-muted hover:bg-muted/70 rounded-md px-4 py-2 transition-colors"
+                    class="bg-bright/40 hover:bg-bright/50 rounded-md px-4 py-2 transition-colors"
                 >
                     All
                 </a>
@@ -52,7 +52,7 @@ const seo = await buildSEO({ title: "Articles" });
                                     "bg-primary text-primary-foreground":
                                         currentTag === tag,
 
-                                    "bg-muted hover:bg-muted/70":
+                                    "bg-bright/50 hover:bg-bright/40":
                                         currentTag !== tag,
                                 },
                             ]}

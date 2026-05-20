@@ -43,7 +43,7 @@ const seo = await buildSEO({ title: "Articles" });
                                     "bg-primary text-primary-foreground":
                                         currentTag === tag,
 
-                                    "bg-muted hover:bg-muted/70":
+                                    "bg-bright/50 hover:bg-bright/40":
                                         currentTag !== tag,
                                 },
                             ]}
@@ -56,7 +56,6 @@ const seo = await buildSEO({ title: "Articles" });
         </div>
 
         <!-- Posts -->
-
         <ul class="flex flex-col gap-1 py-8">
             {
                 filteredPosts.map((post) => (
@@ -69,7 +68,7 @@ const seo = await buildSEO({ title: "Articles" });
                                 <Icon name="lucide:dot" class="size-6" />
                             </span>
 
-                            <h2 class="group-hover:text-primary line-clamp-1 text-base font-medium transition-colors">
+                            <h2 class="group-hover:text-bright line-clamp-1 text-base font-medium transition-colors">
                                 {post.data.title}
                             </h2>
 
