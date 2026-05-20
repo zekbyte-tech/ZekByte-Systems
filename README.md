@@ -1,63 +1,156 @@
-# Astro Starter Kit: Blog
+## Deployment to GitHub/CloudFare
 
-```sh
-npm create astro@latest -- --template blog
+### 1. Create a new GitHub repository
+
+* Log into GitHub
+* Click “New Repository”
+* Create an empty repository (public or private is fine)
+
+### 2. Upload the Astro project
+
+Inside the project folder, run:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin YOUR_GITHUB_REPOSITORY_URL
+git push -u origin main
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 3. Create a Cloudflare Pages project
 
-Features:
+* Log into Cloudflare
+* Go to “Workers & Pages”
+* Click “Create”
+* Select “Pages”
+* Connect your GitHub account
+* Select the repository
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+### 4. Configure the build settings
 
-## 🚀 Project Structure
+Use:
 
-Inside of your Astro project, you'll see the following folders and files:
+* Framework preset: Astro
+* Build command: `npm run build`
+* Build output directory: `dist`
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+Then click “Save and Deploy”.
+
+Cloudflare will build and deploy the website automatically.
+
+### 5. Add the custom domain
+
+Inside the Cloudflare Pages project:
+
+* Go to “Custom Domains”
+* Click “Set up a custom domain”
+* Enter your domain name
+
+### 6. Update the DNS
+
+If your domain is already managed inside Cloudflare:
+
+* Cloudflare usually configures this automatically
+
+If your domain is registered elsewhere:
+
+* Update the nameservers to the ones Cloudflare provides
+* Wait for DNS propagation
+
+### 7. Final check
+
+Once DNS propagation finishes:
+
+* Test the website
+* Verify HTTPS
+* Verify page loading speed
+* Verify the domain points correctly to the new Astro website
+
+After that, every new GitHub push will automatically redeploy the website through Cloudflare Pages.
+
+## Content Management
+
+Everything you need to edit is inside:
+
+```txt
+src/content/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Main Content Files
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+#### Blog Posts
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Add new blog posts inside:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```txt
+src/content/blog/
+```
 
-## 🧞 Commands
+#### Homepage Configuration
 
-All commands are run from the root of the project, from a terminal:
+Edit:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```txt
+src/content/home.yaml
+```
 
-## 👀 Want to learn more?
+#### About Page
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Edit:
 
-## Credit
+```txt
+src/content/about.mdx
+```
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+#### Site-Wide Configuration
+
+Edit:
+
+```txt
+src/content/site.yaml
+```
+
+# Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+The website will be available at:
+
+```txt
+http://localhost:4321
+```
+
+# Production Build
+
+Before pushing changes, always verify the project builds locally:
+
+```bash
+npm run build
+```
+
+If the build completes successfully, the project is ready to deploy.
+
+# Git Workflow
+
+After making changes and confirming the build works:
+
+```bash
+git add .
+git commit -m "Update content"
+git push origin main
+```
+
+Cloudflare Pages will automatically deploy the latest version after the push completes.
+
