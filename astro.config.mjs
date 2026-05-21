@@ -6,6 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig, fontProviders } from "astro/config";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: "https://techlynqtechlyn-website.iago-084.workers.dev/",
   integrations: [mdx(), sitemap(), icon()],
@@ -26,4 +28,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
