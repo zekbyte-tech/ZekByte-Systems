@@ -9,8 +9,8 @@ googleAnalytics: "G-SV3WKS2C5L"
 
 menus:
   main:
-    - name: "Home"
-      href: "/"
+    - name: "YouTube"
+      href: "https://youtube.com"
 
     - name: "Blog"
       href: "/blog"
@@ -20,6 +20,9 @@ menus:
 
     - name: "About"
       href: "/about"
+
+    - name: "RSS"
+      href: "/rss.xml"
 
 social:
   main:
