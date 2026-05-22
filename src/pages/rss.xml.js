@@ -3,16 +3,22 @@ import { getSite } from "../lib/get-site";
 import { getPosts } from "../lib/get-posts";
 
 export function GET(context) {
-    const site = getSite()
-    const posts = getPosts()
+    const site = getSite();
+    const posts = getPosts();
 
     return rss({
         title: site.data.title,
         description: site.data.description,
         site: context.site,
-        items: posts.map((post) => ({
-            ...post.data,
-            link: `/blog/${post.id}/`,
-        })),
+        customData: `<language>en-us</language>`,
+
+        items: posts.map((post) => {
+            const { author, ...data } = post.data;
+
+            return {
+                ...data,
+                link: `/blog/${post.id}/`,
+            };
+        }),
     });
 }
