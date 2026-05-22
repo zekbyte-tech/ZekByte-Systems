@@ -1,20 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
-
-* {
-  font-family:
-    "Inter",
+:root {
+  --font-sans:
+    "Inter Variable",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
     sans-serif;
+
+  --font-mono:
+    "JetBrains Mono",
+    "Courier New",
+    monospace;
+}
+
+html {
+  font-family: var(--font-sans);
 }
 
 pre,
 code,
 pre.astro-code code span span {
-  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
 }

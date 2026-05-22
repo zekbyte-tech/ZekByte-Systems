@@ -7,23 +7,36 @@ import icon from "astro-icon";
 import { defineConfig, fontProviders } from "astro/config";
 
 export default defineConfig({
-  site: "https://techlynqtechlyn-website.iago-084.workers.dev/",
-  integrations: [mdx(), sitemap(), icon()],
+    site: "https://zekbyte.com/",
+    integrations: [mdx(), sitemap(), icon()],
 
-  fonts: [
-    {
-      provider: fontProviders.fontsource(),
-      name: "Geist Sans",
-      cssVariable: "--font-geist",
+    image: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "img.youtube.com",
+            },
+        ],
     },
-    {
-      provider: fontProviders.fontsource(),
-      name: "Geist Mono",
-      cssVariable: "--font-geist-mono",
-    },
-  ],
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+    fonts: [
+        {
+            provider: fontProviders.fontsource(),
+            name: "Geist Sans",
+            cssVariable: "--font-geist",
+        },
+        {
+            provider: fontProviders.fontsource(),
+            name: "Geist Mono",
+            cssVariable: "--font-geist-mono",
+        },
+    ],
+
+    build: {
+        inlineStylesheets: "always",
+    },
+
+    vite: {
+        plugins: [tailwindcss()],
+    },
 });

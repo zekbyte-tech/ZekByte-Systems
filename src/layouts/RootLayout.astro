@@ -6,6 +6,10 @@ import JSONLD from "../components/jsonld.astro";
 import SEO from "../components/seo.astro";
 import { getSite } from "../lib/get-site";
 
+import "@fontsource-variable/inter";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+
 type Props = {
     seo: any;
     schema?: object;
@@ -20,12 +24,13 @@ const GA_ID = site.data.googleAnalytics;
 <!doctype html>
 <html lang="en" class="scroll-smooth">
     <head>
-        <SEO {...seo} />
-        {schema && <JSONLD data={schema} />}
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
+
+        <SEO {...seo} />
+        {schema && <JSONLD data={schema} />}
 
         <!-- Theme -->
         <meta

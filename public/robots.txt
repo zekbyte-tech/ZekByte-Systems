@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://techlynqtechlyn-website.iago-084.workers.dev/sitemap-index.xml
+Sitemap: https://zekbyte.com/sitemap-index.xml

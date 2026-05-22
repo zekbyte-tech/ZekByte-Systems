@@ -1,7 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
 const { post } = Astro.props;
+const thumbnail = `https://img.youtube.com/vi/${post.data.youtubeId}/hqdefault.jpg`;
 ---
 
 <a href={`/blog/${post.id}`} class="group block no-underline">
@@ -9,10 +11,18 @@ const { post } = Astro.props;
         class="border-border hover:border-foreground/20 bg-card overflow-hidden rounded-lg border transition-colors"
     >
         <div class="bg-muted relative aspect-video">
-            <img
-                src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
-                alt={post.data.title}
+            <Image
+                src={thumbnail}
+                alt={post.data.title || "Featured Image"}
+                width={480}
+                height={270}
+                widths={[320, 480, 640]}
+                sizes="(max-width: 768px) 100vw, 410px"
+                format="avif"
+                quality={80}
                 class="h-full w-full object-cover"
+                fetchpriority="high"
+                loading="eager"
             />
             <div
                 class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100"
