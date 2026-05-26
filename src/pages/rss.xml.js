@@ -11,6 +11,10 @@ export function GET(context) {
         description: site.data.description,
         site: context.site,
 
+        xmlns: {
+            atom: "http://www.w3.org/2005/Atom",
+        },
+
         customData: `
             <language>en-us</language>
             <atom:link
