@@ -14,7 +14,14 @@ const { site } = Astro.props;
 <header class="border-border bg-background border-b">
     <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a href="/" class="transition-opacity hover:opacity-70">
-            <h1 class="m-0 tracking-tight">{site?.data.title}</h1>
+            {site.data.logo ?
+            <span>
+                <img src={site.data.logoDark} alt="Site Logo"} class="max-h-10 hidden dark:block" />
+                <img src={site.data.logo} alt="Site Logo"} class="max-h-10 dark:hidden" />
+            </span>
+            :
+                <span class="m-0 tracking-tight">{site?.data.title}</span>
+            }
         </a>
 
         <!-- Desktop Navigation -->

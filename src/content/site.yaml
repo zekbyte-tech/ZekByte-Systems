@@ -1,10 +1,12 @@
 title: "ZekByte Systems"
 description: "In-depth articles and video tutorials about web development, DevOps, databases, and modern software engineering. Learn by building real-world projects."
+image: "/images/site-image-full.png"
 url: "https://zekbyte.com/"
 author: "John Doe"
 twitter: "@johndoe"
 locale: "en_US"
-logo: "/logo.png"
+logo: "/images/site-image.png"
+logoDark: "/images/site-image-dark.png"
 googleAnalytics: "G-SV3WKS2C5L"
 
 menus:

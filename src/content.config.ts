@@ -56,6 +56,7 @@ const site = defineCollection({
         twitter: z.string(),
         locale: z.string(),
         logo: z.string(),
+        logoDark: z.string(),
         googleAnalytics: z.string().optional(),
         menus,
         social,
