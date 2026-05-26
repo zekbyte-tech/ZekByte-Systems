@@ -10,7 +10,15 @@ export function GET(context) {
         title: site.data.title,
         description: site.data.description,
         site: context.site,
-        customData: `<language>en-us</language>`,
+
+        customData: `
+            <language>en-us</language>
+            <atom:link
+                href="${new URL('/rss.xml', context.site)}"
+                rel="self"
+                type="application/rss+xml"
+            />
+        `,
 
         items: posts.map((post) => {
             const { author, ...data } = post.data;
