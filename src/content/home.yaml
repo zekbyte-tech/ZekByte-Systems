@@ -9,6 +9,6 @@ banner:
 
     secondary:
       label: "Watch on YouTube"
-      href: "https://youtube.com"
+      href: "https://www.youtube.com/@ZekByteSystems"
       icon: "lucide:youtube"
       target: "_blank"
