@@ -139,6 +139,7 @@ Once you understand how Linux paths work, this becomes one of the easiest errors
 
 More troubleshooting articles will be added here as the Linux knowledge base grows.
 
+- [Fix Temporary Failure in Name Resolution on Linux (DNS Not Working Fix)](/blog/linux/fix-temporary-failure-name-resolution-linux-dns/)
 - How to Fix "Permission Denied" in Linux
 - How to Fix "Command Not Found" in Linux
 - How to Find Large Files in Linux
