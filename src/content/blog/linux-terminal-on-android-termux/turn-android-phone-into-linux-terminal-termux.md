@@ -83,7 +83,8 @@ Visit the official F-Droid website and download the latest version of Termux.
 - https://f-droid.org/packages/com.termux/
 
 <!-- Screenshot: F-Droid homepage -->
-![](f-droid-homepage-termux-download.webp)
+![](../../../assets/images/linux-terminal-on-android-termux/f-droid-homepage-termux-download.webp)
+<!-- ![](f-droid-homepage-termux-download.webp) >
 
 Search for **Termux** and download the APK.
 
@@ -97,7 +98,8 @@ After downloading:
 <!-- Screenshot: Installing the Termux APK -->
 
 The first launch presents you with a Linux shell ready for use.
-![](install-termux-apk-android.webp)
+<!-- ![](install-termux-apk-android.webp)>
+![](../../../assets/images/linux-terminal-on-android-termux/installing-termux-apk.webp)
 
 ---
 
@@ -179,7 +181,8 @@ fastfetch
 ```
 
 <!-- Screenshot: Fastfetch running inside Termux -->
-![](using-fastfetch-in-termux-on-android.webp)
+<!-- ![](using-fastfetch-in-termux-on-android.webp)>
+![](../../../assets/images/linux-terminal-on-android-termux/using-fastfetch-in-termux-on-android.webp)
 
 Fastfetch displays information such as:
 
@@ -220,7 +223,8 @@ If authentication succeeds, you'll be logged into the remote Linux system.
 Your terminal prompt will change, indicating you're no longer working inside Termux but on the remote server.
 
 <!-- Screenshot: Successful SSH login -->
-![](termux-ssh-to-linux-server.webp)
+![](../../../assets/images/linux-terminal-on-android-termux/termux-ssh-to-linux-server.webp)
+<!-- ![](termux-ssh-to-linux-server.webp) >
 
 ### Verify the Connection
 
@@ -279,7 +283,7 @@ http://SERVER-IP:8080
 Replace **SERVER-IP** with the IP address of your Linux machine.
 
 <!-- Screenshot: Python web server running -->
-![](android-local-web-server-termux.webp)
+![](../../../assets/images/linux-terminal-on-android-termux/python-http-server-linux.webp)
 
 If everything is working correctly, you'll see the directory listing or website being served.
 
@@ -325,7 +329,8 @@ Hello from Android
 ```
 
 <!-- Screenshot: Website served from Android -->
-![](android-local-web-server.webp)
+![](../../../assets/images/linux-terminal-on-android-termux/android-local-web-server-termux.webp)
+<!-- ![](android-local-web-server.webp) >
 
 Congratulations—you've just hosted a webpage directly from your phone.
 
