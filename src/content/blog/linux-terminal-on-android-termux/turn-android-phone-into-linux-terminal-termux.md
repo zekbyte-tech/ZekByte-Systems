@@ -84,7 +84,7 @@ Visit the official F-Droid website and download the latest version of Termux.
 
 <!-- Screenshot: F-Droid homepage -->
 ![](../../../assets/images/linux-terminal-on-android-termux/f-droid-homepage-termux-download.webp)
-<!-- ![](f-droid-homepage-termux-download.webp) >
+<!-- ![](f-droid-homepage-termux-download.webp) -->
 
 Search for **Termux** and download the APK.
 
@@ -98,7 +98,7 @@ After downloading:
 <!-- Screenshot: Installing the Termux APK -->
 
 The first launch presents you with a Linux shell ready for use.
-<!-- ![](install-termux-apk-android.webp)>
+<!-- ![](install-termux-apk-android.webp) -->
 ![](../../../assets/images/linux-terminal-on-android-termux/installing-termux-apk.webp)
 
 ---
@@ -181,7 +181,7 @@ fastfetch
 ```
 
 <!-- Screenshot: Fastfetch running inside Termux -->
-<!-- ![](using-fastfetch-in-termux-on-android.webp)>
+<!-- ![](using-fastfetch-in-termux-on-android.webp) -->
 ![](../../../assets/images/linux-terminal-on-android-termux/using-fastfetch-in-termux-on-android.webp)
 
 Fastfetch displays information such as:
@@ -224,7 +224,7 @@ Your terminal prompt will change, indicating you're no longer working inside Ter
 
 <!-- Screenshot: Successful SSH login -->
 ![](../../../assets/images/linux-terminal-on-android-termux/termux-ssh-to-linux-server.webp)
-<!-- ![](termux-ssh-to-linux-server.webp) >
+<!-- ![](termux-ssh-to-linux-server.webp) -->
 
 ### Verify the Connection
 
@@ -330,7 +330,7 @@ Hello from Android
 
 <!-- Screenshot: Website served from Android -->
 ![](../../../assets/images/linux-terminal-on-android-termux/android-local-web-server-termux.webp)
-<!-- ![](android-local-web-server.webp) >
+<!-- ![](android-local-web-server.webp) -->
 
 Congratulations—you've just hosted a webpage directly from your phone.
 
