@@ -1,6 +1,6 @@
 ---
 title: "How to Turn Your Android Phone into a Linux Terminal with Termux"
-excerpt: > "Learn how to install Termux on Android, run Linux commands, connect to remote Linux servers over SSH, and even host a simple web server from your phone."
+excerpt: "Learn how to install Termux on Android, run Linux commands, connect to remote Linux servers over SSH, and even host a simple web server from your phone."
 youtubeId: "7yS6HsVwl4M"
 featured: false
 publishedAt: "Aug 03 2026"
@@ -97,7 +97,7 @@ After downloading:
 <!-- Screenshot: Installing the Termux APK -->
 
 The first launch presents you with a Linux shell ready for use.
-![](Installing-the-Termux-APK.webp)
+![](install-termux-apk-android.webp)
 
 ---
 
