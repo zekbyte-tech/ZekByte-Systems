@@ -4,15 +4,15 @@ excerpt: "Learn how to install Termux on Android, run Linux commands, connect to
 youtubeId: "7yS6HsVwl4M"
 featured: false
 publishedAt: "Aug 03 2026"
-tags: [
+tags: 
   - Android
   - Linux
   - Termux
   - SSH
   - Python
   - Linux Terminal
-  ]
-  author: "Zekbyte "
+  
+author: "Zekbyte Systems"
 ---
 
 # How to Turn Your Android Phone into a Linux Terminal with Termux
